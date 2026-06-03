@@ -1,37 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Sistem Estimasi Biaya Kegiatan Mahasiswa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Estimasi Biaya Kegiatan Mahasiswa</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    color:#0078D4;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#f8fafc;
+    border-left:5px solid #0078D4;
+    padding:15px;
+    margin-bottom:20px;
+    border-radius:8px;
+}
+
+h2{
+    margin-bottom:10px;
+    color:#333;
+}
+
+ul{
+    margin-left:20px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+.api-box{
+    background:#1e293b;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+    overflow:auto;
+}
+
+.footer{
+    margin-top:30px;
+    text-align:center;
+    color:#666;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
+<div class="container">
 
-<p><b>Nama:</b> NAMA KAMU</p>
-<p><b>NIM:</b> NIM KAMU</p>
+    <h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
 
-<h2>Daftar Harga Konsumsi</h2>
+    <p class="subtitle">
+        Mini Project Komputasi Awan - Azure Serverless
+    </p>
 
-<ul>
-    <li>Snack : Rp15.000</li>
-    <li>Makan : Rp30.000</li>
-    <li>Lengkap : Rp45.000</li>
-</ul>
+    <div class="card">
+        <h2>Informasi Mahasiswa</h2>
+        <p><b>Nama :</b> Nama Kamu</p>
+        <p><b>NIM :</b> NIM Kamu</p>
+    </div>
 
-<h2>Layanan Azure yang Digunakan</h2>
+    <div class="card">
+        <h2>Daftar Harga Konsumsi</h2>
+        <ul>
+            <li>Snack : Rp15.000 / peserta</li>
+            <li>Makan : Rp30.000 / peserta</li>
+            <li>Lengkap : Rp45.000 / peserta</li>
+        </ul>
+    </div>
 
-<ul>
-    <li>Azure Static Web Apps</li>
-    <li>Azure Functions</li>
-</ul>
+    <div class="card">
+        <h2>Layanan Azure yang Digunakan</h2>
+        <ul>
+            <li>Azure Static Web Apps</li>
+            <li>Azure Functions</li>
+        </ul>
+    </div>
 
-<p>
-Contoh API:
-</p>
+    <div class="card">
+        <h2>Contoh Penggunaan API</h2>
 
-<p>
-?jumlah=40&jenis=snack
-</p>
+        <p>Input:</p>
+
+        <div class="api-box">
+            ?jumlah=40&jenis=snack
+        </div>
+
+        <br>
+
+        <p>Output:</p>
+
+        <div class="api-box">
+{
+  "jumlah": 40,
+  "jenis": "snack",
+  "hargaPerPeserta": 15000,
+  "total": 600000
+}
+        </div>
+    </div>
+
+    <div class="footer">
+        Azure Serverless Mini Project © 2026
+    </div>
+
+</div>
 
 </body>
 </html>
