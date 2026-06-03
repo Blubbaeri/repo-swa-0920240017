@@ -10,7 +10,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -24,7 +24,7 @@ body{
     background:white;
     padding:30px;
     border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
 }
 
 h1{
@@ -32,44 +32,52 @@ h1{
     margin-bottom:10px;
 }
 
-.subtitle{
-    color:#666;
-    margin-bottom:25px;
-}
-
 .card{
     background:#f8fafc;
+    padding:20px;
     border-left:5px solid #0078D4;
-    padding:15px;
+    border-radius:8px;
     margin-bottom:20px;
-    border-radius:8px;
 }
 
-h2{
-    margin-bottom:10px;
-    color:#333;
+label{
+    display:block;
+    margin-top:10px;
+    margin-bottom:5px;
 }
 
-ul{
-    margin-left:20px;
+input,select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
 
-li{
-    margin-bottom:8px;
-}
-
-.api-box{
-    background:#1e293b;
+button{
+    margin-top:15px;
+    background:#0078D4;
     color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+#hasil{
+    margin-top:20px;
+    background:#eef7ff;
     padding:15px;
     border-radius:8px;
-    margin-top:10px;
-    overflow:auto;
+    display:none;
 }
 
 .footer{
-    margin-top:30px;
     text-align:center;
+    margin-top:20px;
     color:#666;
 }
 </style>
@@ -79,63 +87,76 @@ li{
 
 <div class="container">
 
-    <h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
+<h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
 
-    <p class="subtitle">
-        Mini Project Komputasi Awan - Azure Serverless
-    </p>
+<div class="card">
+    <p><b>Nama:</b> NAMA KAMU</p>
+    <p><b>NIM:</b> NIM KAMU</p>
+</div>
 
-    <div class="card">
-        <h2>Informasi Mahasiswa</h2>
-        <p><b>Nama :</b> Muhammad Ghadir Ridho</p>
-        <p><b>NIM :</b> 0920240017</p>
-    </div>
+<div class="card">
+    <h3>Daftar Harga Konsumsi</h3>
+    <ul>
+        <li>Snack : Rp15.000</li>
+        <li>Makan : Rp30.000</li>
+        <li>Lengkap : Rp45.000</li>
+    </ul>
+</div>
 
-    <div class="card">
-        <h2>Daftar Harga Konsumsi</h2>
-        <ul>
-            <li>Snack : Rp15.000 / peserta</li>
-            <li>Makan : Rp30.000 / peserta</li>
-            <li>Lengkap : Rp45.000 / peserta</li>
-        </ul>
-    </div>
+<div class="card">
 
-    <div class="card">
-        <h2>Layanan Azure yang Digunakan</h2>
-        <ul>
-            <li>Azure Static Web Apps</li>
-            <li>Azure Functions</li>
-        </ul>
-    </div>
+    <h3>Hitung Estimasi Biaya</h3>
 
-    <div class="card">
-        <h2>Contoh Penggunaan API</h2>
+    <label>Jumlah Peserta</label>
+    <input type="number" id="jumlah" value="40">
 
-        <p>Input:</p>
+    <label>Jenis Konsumsi</label>
+    <select id="jenis">
+        <option value="snack">Snack</option>
+        <option value="makan">Makan</option>
+        <option value="lengkap">Lengkap</option>
+    </select>
 
-        <div class="api-box">
-            ?jumlah=40&jenis=snack
-        </div>
+    <button onclick="hitungBiaya()">
+        Hitung Estimasi
+    </button>
 
-        <br>
-
-        <p>Output:</p>
-
-        <div class="api-box">
-{
-  "jumlah": 40,
-  "jenis": "snack",
-  "hargaPerPeserta": 15000,
-  "total": 600000
-}
-        </div>
-    </div>
-
-    <div class="footer">
-        Azure Serverless Mini Project © 2026
-    </div>
+    <div id="hasil"></div>
 
 </div>
+
+<div class="footer">
+    Azure Static Web Apps + Azure Functions
+</div>
+
+</div>
+
+<script>
+
+async function hitungBiaya(){
+
+    const jumlah = document.getElementById("jumlah").value;
+    const jenis = document.getElementById("jenis").value;
+
+    const url =
+    "https://func-serverless-017-hcakbceecrgde9eh.eastasia-01.azurewebsites.net/api/EstimasiBiayaKegiatan"
+    + "?jumlah=" + jumlah
+    + "&jenis=" + jenis;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    document.getElementById("hasil").style.display = "block";
+
+    document.getElementById("hasil").innerHTML = `
+        <h3>Hasil Perhitungan</h3>
+        <p>Jumlah Peserta : ${data.jumlah}</p>
+        <p>Jenis Konsumsi : ${data.jenis}</p>
+        <p>Harga/Peserta : Rp ${data.hargaPerPeserta.toLocaleString('id-ID')}</p>
+        <p>Total Biaya : Rp ${data.total.toLocaleString('id-ID')}</p>
+    `;
+}
+</script>
 
 </body>
 </html>
