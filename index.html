@@ -3,83 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sistem Estimasi Biaya Kegiatan Mahasiswa</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:'Segoe UI', Arial, sans-serif;
 }
 
 body{
-    background:#f4f6f9;
-    padding:40px;
+    background:linear-gradient(135deg,#0078D4,#00A4EF);
+    min-height:100vh;
+    padding:40px 20px;
 }
 
 .container{
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.1);
 }
 
-h1{
+.header{
+    text-align:center;
+    color:white;
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.header p{
+    opacity:.9;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#0078D4;
+    margin-bottom:20px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.info-box{
+    background:#f7f9fc;
+    border-radius:12px;
+    padding:15px;
+    border-left:5px solid #0078D4;
+}
+
+.info-box p{
+    margin-bottom:8px;
+}
+
+.price-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.price-card{
+    background:#f8fbff;
+    border:1px solid #dbeafe;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.price-card:hover{
+    transform:translateY(-5px);
+}
+
+.price-card h3{
     color:#0078D4;
     margin-bottom:10px;
 }
 
-.card{
-    background:#f8fafc;
-    padding:20px;
-    border-left:5px solid #0078D4;
-    border-radius:8px;
-    margin-bottom:20px;
+.price{
+    font-size:24px;
+    font-weight:bold;
+    color:#16a34a;
+}
+
+.azure-list li{
+    margin-bottom:10px;
+}
+
+.form-group{
+    margin-bottom:18px;
 }
 
 label{
     display:block;
-    margin-top:10px;
-    margin-bottom:5px;
+    margin-bottom:8px;
+    font-weight:600;
 }
 
 input,select{
     width:100%;
-    padding:10px;
+    padding:14px;
     border:1px solid #ccc;
-    border-radius:6px;
+    border-radius:10px;
+    font-size:16px;
 }
 
 button{
-    margin-top:15px;
+    width:100%;
     background:#0078D4;
     color:white;
     border:none;
-    padding:12px 20px;
-    border-radius:6px;
+    padding:15px;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:bold;
     cursor:pointer;
+    transition:.3s;
 }
 
 button:hover{
-    opacity:.9;
+    background:#005ea6;
 }
 
 #hasil{
-    margin-top:20px;
-    background:#eef7ff;
-    padding:15px;
-    border-radius:8px;
+    margin-top:25px;
     display:none;
+    background:#eff6ff;
+    border-radius:15px;
+    padding:20px;
+    border-left:6px solid #0078D4;
+}
+
+.result-item{
+    margin-bottom:12px;
+    font-size:16px;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:30px;
+    background:#0078D4;
+    color:white;
+    font-size:14px;
 }
 
 .footer{
     text-align:center;
+    color:white;
     margin-top:20px;
-    color:#666;
+    opacity:.9;
 }
+
 </style>
 </head>
 
@@ -87,47 +177,114 @@ button:hover{
 
 <div class="container">
 
-<h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
+    <div class="header">
+        <h1>Sistem Estimasi Biaya Kegiatan Mahasiswa</h1>
+        <p>Mini Project Azure Serverless - Komputasi Awan</p>
+    </div>
 
-<div class="card">
-    <p><b>Nama:</b> M Ghadir Ridho</p>
-    <p><b>NIM:</b> 0920240017</p>
-</div>
+    <!-- Identitas -->
+    <div class="card">
 
-<div class="card">
-    <h3>Daftar Harga Konsumsi</h3>
-    <ul>
-        <li>Snack : Rp15.000</li>
-        <li>Makan : Rp30.000</li>
-        <li>Lengkap : Rp45.000</li>
-    </ul>
-</div>
+        <h2>Identitas Praktikum</h2>
 
-<div class="card">
+        <div class="info-grid">
 
-    <h3>Hitung Estimasi Biaya</h3>
+            <div class="info-box">
+                <p><b>Nama</b></p>
+                <p>M Ghadir Ridho</p>
+            </div>
 
-    <label>Jumlah Peserta</label>
-    <input type="number" id="jumlah" value="40">
+            <div class="info-box">
+                <p><b>NIM</b></p>
+                <p>0920240017</p>
+            </div>
 
-    <label>Jenis Konsumsi</label>
-    <select id="jenis">
-        <option value="snack">Snack</option>
-        <option value="makan">Makan</option>
-        <option value="lengkap">Lengkap</option>
-    </select>
+            <div class="info-box">
+                <p><b>Mata Kuliah</b></p>
+                <p>Komputasi Awan</p>
+            </div>
 
-    <button onclick="hitungBiaya()">
-        Hitung Estimasi
-    </button>
+            <div class="info-box">
+                <p><b>Praktikum</b></p>
+                <p>Mini Project Azure Serverless</p>
+            </div>
 
-    <div id="hasil"></div>
+        </div>
 
-</div>
+    </div>
 
-<div class="footer">
-    Azure Static Web Apps + Azure Functions
-</div>
+    <!-- Harga -->
+    <div class="card">
+
+        <h2>Daftar Harga Konsumsi</h2>
+
+        <div class="price-grid">
+
+            <div class="price-card">
+                <h3>Snack</h3>
+                <p class="price">Rp15.000</p>
+                <small>Per peserta</small>
+            </div>
+
+            <div class="price-card">
+                <h3>Makan</h3>
+                <p class="price">Rp30.000</p>
+                <small>Per peserta</small>
+            </div>
+
+            <div class="price-card">
+                <h3>Lengkap</h3>
+                <p class="price">Rp45.000</p>
+                <small>Per peserta</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Azure -->
+    <div class="card">
+
+        <h2>Layanan Azure yang Digunakan</h2>
+
+        <ul class="azure-list">
+            <li>Azure Static Web Apps (Frontend Website)</li>
+            <li>Azure Functions (Backend API Estimasi Biaya)</li>
+        </ul>
+
+    </div>
+
+    <!-- Form Estimasi -->
+    <div class="card">
+
+        <h2>Hitung Estimasi Biaya</h2>
+
+        <div class="form-group">
+            <label>Jumlah Peserta</label>
+            <input type="number" id="jumlah" value="40">
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Konsumsi</label>
+
+            <select id="jenis">
+                <option value="snack">Snack</option>
+                <option value="makan">Makan</option>
+                <option value="lengkap">Lengkap</option>
+            </select>
+        </div>
+
+        <button onclick="hitungBiaya()">
+            Hitung Estimasi
+        </button>
+
+        <div id="hasil"></div>
+
+    </div>
+
+    <div class="footer">
+        Azure Static Web Apps + Azure Functions © 2026
+    </div>
 
 </div>
 
@@ -135,27 +292,66 @@ button:hover{
 
 async function hitungBiaya(){
 
-    const jumlah = document.getElementById("jumlah").value;
-    const jenis = document.getElementById("jenis").value;
+    const jumlah =
+    document.getElementById("jumlah").value;
+
+    const jenis =
+    document.getElementById("jenis").value;
 
     const url =
     "https://func-serverless-017-hcakbceecrgde9eh.eastasia-01.azurewebsites.net/api/EstimasiBiayaKegiatan"
     + "?jumlah=" + jumlah
     + "&jenis=" + jenis;
 
-    const response = await fetch(url);
-    const data = await response.json();
+    try{
 
-    document.getElementById("hasil").style.display = "block";
+        const response = await fetch(url);
+        const data = await response.json();
 
-    document.getElementById("hasil").innerHTML = `
-        <h3>Hasil Perhitungan</h3>
-        <p>Jumlah Peserta : ${data.jumlah}</p>
-        <p>Jenis Konsumsi : ${data.jenis}</p>
-        <p>Harga/Peserta : Rp ${data.hargaPerPeserta.toLocaleString('id-ID')}</p>
-        <p>Total Biaya : Rp ${data.total.toLocaleString('id-ID')}</p>
-    `;
+        const hasil =
+        document.getElementById("hasil");
+
+        hasil.style.display = "block";
+
+        hasil.innerHTML = `
+            <h2>Hasil Perhitungan</h2>
+
+            <div class="result-item">
+                <b>Jumlah Peserta:</b>
+                ${data.jumlah}
+            </div>
+
+            <div class="result-item">
+                <b>Jenis Konsumsi:</b>
+                <span class="badge">
+                ${data.jenis}
+                </span>
+            </div>
+
+            <div class="result-item">
+                <b>Harga per Peserta:</b>
+                Rp ${data.hargaPerPeserta.toLocaleString('id-ID')}
+            </div>
+
+            <div class="result-item">
+                <b>Total Estimasi:</b>
+                Rp ${data.total.toLocaleString('id-ID')}
+            </div>
+
+            <div class="result-item">
+                <b>Timestamp:</b>
+                ${data.timestamp}
+            </div>
+        `;
+
+    } catch(error){
+
+        alert("Gagal mengambil data API.");
+        console.error(error);
+
+    }
 }
+
 </script>
 
 </body>
